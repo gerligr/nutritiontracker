@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/dependencies/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>Toitumise jälgimise APP</title>
+</head>
+
+<body>
+    <div id="topMenuContainer" class="container-fluid">
+    </div>
+    <div id="loginContainer" class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <br />
+
+                <div>
+                    <strong style="padding: 5px; font-size: 28px; background-color: rgb(255, 255, 255, 0.7); border-radius: 8px;">Sisselogimine</strong>
+                </div><br>
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Kasutajanimi" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Parool" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-block" onclick="loginUser()">
+                        Logi sisse
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-block" onclick="openRegistrationModal()">
+                        Registreeri kasutaja
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mainContainer" class="container-fluid" style="display: none;">
+        <br />
+        <div class="row justify-content-center">
+            <div class="col-sm-3 col-sm-6 col-6" style="padding: 5px;">
+                <button class="btn btn-success btn-block" onClick="openChildModalForInsert()">Lisa lapse andmed</button>
+            </div>
+        </div>
+        </br>
+        <!-- <div class="row justify-content-center">
+            <div style="padding: 5px;">
+                <h1></h1>
+            </div>
+        </div> -->
+        <!-- <div class="row justify-content-center">
+            <div class="col-md-3" style="padding: 10px;">
+                <select class="form-control" style="width: 100%;" id="viewSelect" onchange="changeView()">
+                    <option value="LIST">Nimekiri</option>
+                    <option value="CHART">Diagramm</option>
+                </select>
+            </div>
+        </div> -->
+        <div id="childList" ></div>
+        <!-- <div id="companyList"></div> -->
+        <!--<div id="companyChart"></div> -->
+    </div>
+    <br />
+
+    <!-- Company Modal -->
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userModalLabel">Kasutaja lisamine</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" role="alert" id="userErrorPanel" style="display: none;"></div>
+                    <input type="hidden" id="id" />
+                    <div class="form-group">
+                        <label for="registrationName">Nimi:</label>
+                        <input type="text" id="registrationName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="registrationUsername">Kasutajanimi:</label>
+                        <input type="text" id="registrationUsername" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="registrationPassword">Parool:</label>
+                        <input type="password" id="registrationPassword" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                        <button type="button" class="btn btn-primary" onclick="saveUser()">Salvesta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="childModal" tabindex="-1" role="dialog" aria-labelledby="childModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="childModalLabel">Lapse andmete lisamine/muutmine</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" role="alert" id="childErrorPanel" style="display: none;"></div>
+                    <input type="hidden" id="childId" />
+                    <div class="form-group">
+                        <label for="childName">Nimi:</label>
+                        <input type="text" id="childName" class="form-control" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="photo">Foto URL:</label>
+                        <input type="text" id="photo" class="form-control" /><br />
+                        <input type="file" id="file" name="file" class="form-control" title="Lae foto fail" /><br />
+                        <button class="btn btn-dark" onClick="savePhotoFile(event)">Lae foto</button>                        
+                    </div>
+                    <br />
+                    
+                    <div class="form-control">
+                        <label for="age">Vanus:</label>
+                        <select id="age" >                            
+                            <option selected value="">-</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="form-control">
+                        <label for="gender">Sugu: </label>
+                        <select id="gender">
+                            <option selected value="">-</option>
+                            <option value="M">Poiss</option>
+                            <option value="F">Tüdruk</option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="form-control">
+                        <label for="physicalActivity">Kehaline aktiivsus: </label>
+                        <select id="physicalActivity">
+                            <option value="">-</option>
+                            <option value="low">Väheaktiivne</option>
+                            <option value="medium">Aktiivne</option>
+                            <option value="high">Üliaktiivne</option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                        <button type="button" class="btn btn-primary" onclick="saveChild()">Salvesta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="menuModalLabel">Menüü lisamine/muutmine</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" role="alert" id="menuErrorPanel" style="display: none;"></div>
+                    <input type="hidden" id="menuId" />
+                    <input type="hidden" id="childId" />
+                    <br />
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Hommikusöök:</label>
+                        </div>
+                        <select class="custom-select" id="breakfast">
+                            <option selected>Tee hommikusöögi valik...</option>
+                            <option value="1">tatrapuder</option>
+                            <option value="4">mannapuder</option>
+                            <option value="6">omlett</option>
+                        </select>
+                        <select class="custom-select col-md-3" id="breakfastAmount">
+                            <option selected>Kogus</option>
+                            <option value="100">100 grammi</option>
+                            <option value="200">200 grammi</option>
+                            <option value="300">300 grammi</option>
+                            <option value="400">400 grammi</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Lõunaoode: </label>
+                        </div>
+                        <select class="custom-select" id="lunchsnack">
+                            <option selected>Tee lõunaoote valik...</option>
+                            <option value="10">pirn</option>
+                            <option value="11">porgand</option>
+                            <option value="12">kaalikas</option>
+                            <option value="13">banaan</option>
+                            <option value="14">paprika</option>
+                            <option value="15">banaanikeefir</option>
+                        </select>
+                        <select class="custom-select col-md-3" id="lunchsnackAmount">
+                            <option selected>Kogus</option>
+                            <option value="100">100 grammi</option>
+                            <option value="200">200 grammi</option>
+                            <option value="300">300 grammi</option>
+                            <option value="400">400 grammi</option>
+                        </select>
+                    </div>                    
+                    <br />
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="lunch">Lõunasöök: </label>
+                        </div>
+                        <select class="custom-select" id="lunch">
+                            <option selected>Tee lõunasöögi valik...</option>
+                            <option value="2">raguu</option>
+                            <option value="3">ühepajatoit</option>
+                            <option value="5">kana-kartuli-riisisupp</option>
+                            <option value="7">lasanje</option>
+                            <option value="8">pilaff</option>
+                            <option value="9">värskekapsahautis</option>
+                        </select>
+                        <select class="custom-select col-md-3" id="lunchAmount">
+                            <option selected>Kogus</option>
+                            <option value="100">100 grammi</option>
+                            <option value="200">200 grammi</option>
+                            <option value="300">300 grammi</option>
+                            <option value="400">400 grammi</option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="dinnersnack">Õhtuoode: </label>
+                        </div>
+                        <select class="custom-select" id="dinnersnack">
+                            <option selected>Tee õhtuoote valik...</option>
+                            <option value="10">pirn</option>
+                            <option value="11">porgand</option>
+                            <option value="12">kaalikas</option>
+                            <option value="13">banaan</option>
+                            <option value="14">paprika</option>
+                            <option value="15">banaanikeefir</option>
+                        </select>
+                        <select class="custom-select col-md-3" id="dinnersnackAmount">
+                            <option selected>Kogus</option>
+                            <option value="100">100 grammi</option>
+                            <option value="200">200 grammi</option>
+                            <option value="300">300 grammi</option>
+                            <option value="400">400 grammi</option>
+                        </select>
+                    </div>         
+                    <br />
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="dinner">Õhtusöök: </label>
+                        </div>
+                        <select class="custom-select" id="dinner">
+                            <option selected>Tee õhtusöögi valik...</option>
+                            <option value="2">raguu</option>
+                            <option value="3">ühepajatoit</option>
+                            <option value="5">kana-kartuli-riisisupp</option>
+                            <option value="7">lasanje</option>
+                            <option value="8">pilaff</option>
+                            <option value="9">värskekapsahautis</option>
+                        </select>
+                        <select class="custom-select col-md-3" id="dinnerAmount">
+                            <option selected>Kogus</option>
+                            <option value="100">100 grammi</option>
+                            <option value="200">200 grammi</option>
+                            <option value="300">300 grammi</option>
+                            <option value="400">400 grammi</option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                        <button type="button" class="btn btn-primary" onclick="calculateMenu()">Kalkuleeri</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="assets/dependencies/jquery-3.3.1/jquery-3.3.1.slim.min.js"></script>
+    <script src="assets/dependencies/popper-1.14.7/popper.min.js"></script>
+    <script src="assets/dependencies/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="assets/dependencies/charts-2.8.0/chart.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/fetchApi.js"></script>
+    <script src="assets/js/companyListView.js"></script>
+    <script src="assets/js/companyChartView.js"></script>
+    <script src="assets/js/menuView.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/controller.js"></script>
+    <script>
+        // After page load.
+        generateTopMenu();
+        loadChildren();
+    </script>
+</body>
+
+</html>

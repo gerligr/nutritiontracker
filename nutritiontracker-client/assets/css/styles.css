@@ -1,0 +1,214 @@
+/* Project specific styles here */
+
+@import url('https://fonts.googleapis.com/css?family=Nixie+One|Raleway:200');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    font-family: Calibri;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("bg1_2.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;   
+    
+}
+
+
+.display-container {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 15px 5px;
+}
+
+
+.note-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 25px;
+}
+
+.circle__progress {
+    fill: none;
+    stroke-width: 3;
+    stroke-opacity: 0.3;
+    stroke-linecap: round;
+}
+
+.note-display.color1 .circle__progress { stroke: #FFB931; }
+.note-display.color2 .circle__progress { stroke: #FF5C31; }
+.note-display.color3 .circle__progress { stroke: #315AB0; }
+.note-display.color4 .circle__progress { stroke: #24BA65; }
+
+.circle {
+    position: relative;
+  }
+  
+.percent {
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    line-height: 28px;
+    transform: translate(-50%, -50%);
+    
+}
+  
+.percent__int { font-size: 28px; }
+.percent__dec { font-size: 12px; }
+  
+.label {
+    font-family: 'Raleway', serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-top: 15px;
+    
+}
+
+.circle__progress--fill {
+    --initialStroke: 0;
+    --transitionDuration: 0;
+    stroke-opacity: 1;
+    stroke-dasharray: var(--initialStroke);
+    stroke-dashoffset: var(--initialStroke);
+    transition: stroke-dashoffset var(--transitionDuration) ease;
+  }
+
+.circle__svg {
+    transform: rotate(-90deg);
+}
+
+#childBox {
+    background-color: rgba(190, 166, 160, 0.95);
+    border: 1px solid black;
+    margin: 0% 10% 0% 10%;
+    padding: 40px;
+    /* word-wrap: break-word; */
+}
+
+img {
+    max-width: 170;
+    max-height: 150px;
+}
+
+
+#ChildRowDataTitleCell {
+    text-overflow: ellipsis;
+    white-space: wrap;
+    overflow: hidden;
+    width:110px;
+    background-color: rgba(255, 227, 221, 0.5);
+    border: 1px dotted white;
+    border-radius: 5px 0px 0px 5px;
+}
+
+#ChildRowDataValueCell {
+    word-wrap: break-word;
+    background-color: (190, 166, 160, 1);
+    border: 1px dotted white;
+    border-radius: 0px 5px 5px 0px;
+}
+
+#menuRows {
+    padding: 5px;
+    background-color: rgba(255, 227, 221, 0.4);
+    border: 2px solid rgba(255, 227, 221, 1);
+    border-radius: 5px;
+    font-weight: initial;
+}
+
+
+
+#changeButton {
+    background-color: rgb(6, 108, 126);
+    border: rgb(6, 108, 126);
+}
+#changeButton:hover {
+    background-color: rgb(6, 90, 105);
+    border: #05687A;
+}
+
+#deleteButton {
+    background-color: #930024;
+    border: #930024;
+}
+#deleteButton:hover {
+    background-color: #b60e38;
+    border: #b60e38;
+}
+
+#menuButton {
+    background-color:rgb(255, 185, 49);
+    border: rgb(212, 250, 136);
+}
+#menuButton:hover {
+    background-color:rgb(255, 170, 0);
+    border: rgb(224, 253, 167);
+}
+
+
+
+@media (max-width: 1325px) {
+    #childBox {
+        margin: 20px;
+        padding: 20px 20px;
+    }
+}
+
+@media (max-width: 1100px) {
+    #ChildRowDataTitleCell {
+        padding: 5px 2px;
+    }
+}
+
+
+@media (max-width: 960px) {
+    #ChildRowDataTitleCell {
+        padding: 5px 0px;
+        word-wrap: break-word;
+    }
+}
+
+@media (max-width: 720px) {
+    #menuRows {
+        word-wrap: break-word;
+    }
+}
+
+@media (max-width: 576px) {
+    img {
+        max-width: 170px;
+    }
+    #el3LogicBorder {
+        word-wrap: break-word;
+        border: 1px dashed rgb(0, 0, 0, 0.1);
+    }
+}
+
+@media (max-width: 264px) {
+    #body {
+        min-width: 200px;
+    }
+
+    #childBox {
+        min-width: 200px;
+    }
+}
+
+
+
+
+
+
