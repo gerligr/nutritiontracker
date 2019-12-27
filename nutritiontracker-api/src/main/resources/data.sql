@@ -1,8 +1,23 @@
 
-INSERT INTO `user` (`id`, `username`, `name`, `email`, `password`) VALUES
-	(1, 'admin', 'Admin', '', '$2a$10$iz1QiuSVUMFcXdx5Xs2mr.OdTZBuutK0GrKqWS8x2OhaDz8jKV5ei');
-INSERT INTO `user` (`id`, `username`, `name`, `email`, `password`) VALUES
-	(1, 'user1', 'User1', '', '$2a$10$iz1QiuSVUMFcXdx5Xs2mr.OdTZBuutK0GrKqWS8x2OhaDz8jKV5ei');
+INSERT INTO `user` (`id`, `username`, `password`, `name`, `email`) VALUES
+	(1, 'admin', '$2a$10$iz1QiuSVUMFcXdx5Xs2mr.OdTZBuutK0GrKqWS8x2OhaDz8jKV5ei', 'Admin', '@'),
+	(2, 'MarekL', '$2a$10$3zp5W6S43V81Xk0yWUosLuwfnFwyeCjjpqVmLRQUrHI9BAIIxSYGC', 'Marek', 'gerli@gerli.com'),
+	(3, 'kadriv', '$2a$10$YYeNhlf0tadQDNbEX9TkaO0h5dhp3L5L1AV2GxdlCmNlk4qcHTFRa', 'Kadri', '@'),
+	(4, 'gerlig', '$2a$10$PwQ/jRzozuR8bm.6j36RHe1.wnSCP.LtscVPPtr.SkL5r4cQyNe4q', 'Gerli', '@'),
+	(5, 'Siret100', '$2a$10$TiggIchfeNJZZY5yiJVBIOBuKU0CqOmLmcJxcYHRv6XM.dgbnQ//W', 'Siret', 'siret@siret.ee');
+
+INSERT INTO `person` (`id`, `user_id`, `name`, `photo`, `age`, `gender`, `physical_activity`) VALUES
+	(3, 2, 'Meeri', 'http://localhost:8101/files/file/88cdd6b1-96b4-4bca-aa8e-b4ec3fca35fc.png', 5, 'F', 'medium'),
+	(23, 3, 'Plika', 'http://localhost:8101/files/file/87b913d3-5cf5-4ee7-a795-e5fd76753747.png', 8, 'F', 'low'),
+	(24, 3, 'Mats', 'http://localhost:8101/files/file/e1754bde-a9df-4d6e-af39-c4f87b2a6bf5.png', 6, 'M', 'high'),
+	(27, 1, 'adminike', '', 3, 'M', 'low'),
+	(29, 2, 'Siim', 'https://images.unsplash.com/flagged/photo-1551600466-464bbbbd15f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 5, 'M', 'low'),
+	(30, 4, 'Marju', 'https://images.unsplash.com/photo-1458134580443-fbb0743304eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 5, 'F', 'medium'),
+	(31, 4, 'Paul', 'https://images.unsplash.com/photo-1472162072942-cd5147eb3902?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 5, 'M', 'medium'),
+	(32, 4, 'Liisa', 'https://images.unsplash.com/photo-1517508633535-fa608e568fb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 6, 'F', 'medium'),
+	(34, 1, 'test', '', 3, 'F', 'medium'),
+	(38, 3, 'Plika', '', 4, 'F', 'low'),
+	(39, 4, 'Siim', 'https://images.unsplash.com/photo-1533512930330-4ac257c86793?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 4, 'M', 'high');
 
 INSERT INTO `data_calculation` (`id`, `gender`, `age`, `physical_activity`, `energy`, `protein_min`, `protein_max`, `fat_min`, `fat_max`, `carb_min`, `carb_max`) VALUES
 	(1, 'M', 2, 'low', 1050, 105, 210, 263, 368, 525, 630),
@@ -60,8 +75,7 @@ INSERT INTO `data_calculation` (`id`, `gender`, `age`, `physical_activity`, `ene
 	(53, 'F', 10, 'medium', 1990, 199, 398, 498, 697, 995, 1194),
 	(54, 'F', 10, 'high', 2130, 213, 426, 533, 746, 1065, 1278);
 
-
-INSERT INTO `foods` (`id`, `name`, `energy`, `protein`, `fat`, `carb`, `ingredients`, `instructions`) VALUES
+INSERT INTO `menu` (`id`, `name`, `energy`, `protein`, `fat`, `carb`, `ingredients`, `instructions`) VALUES
 	(1, 'Tatrapuder, võiga (vesi)', 98, 12, 23, 61, 'või (82%), tatar (röstitud kuivaine), vesi', 'Vesi kuumutada keemiseni, lisada tatrarangud, keeta tasasel tulel pudru valmimiseni, lisada või, maitsestada soolaga. dl = 100 g; spl = 15 g'),
 	(2, 'Raguu, köögiviljadega, lihata, õliga', 62, 5, 19, 33, 'vesi, peakapsas (valge), kaalikas, mugulsibul, porgand, kartul (kooreta), rapsiõli', 'Köögiviljad puhastada, tükeldada suuremateks kuubikuteks. Kaalikad, porgandid ja sibulad kuumutada õlis, hautada väheses vedelikus poolpehmeks. Lisada juurde kuubikuteks tükeldadtud värske kapsas ning viimasena kartul, hautada koos roa valmimiseni, maitsestada. dl = 110 g'),
 	(3, 'Ühepajatoit, sealihast', 105, 26, 49, 26, 'sealiha (toores), vesi, peakapsas (valge), porgand, kaalikas, kartul (kooreta)', 'Sealiha keeta soolaga maitsestatud vees. Poolpehmele lihale lisada juurde köögiviljad valmimise järjekorras: esimesena kaalikaviilud, siis terved porgandid, seejärel kapsalohud ja viimsena terved või poolitatud kartulid. Keeduleet saab kasutada roa serveerimisel kastmena. dl = 55 g'),
@@ -77,3 +91,24 @@ INSERT INTO `foods` (`id`, `name`, `energy`, `protein`, `fat`, `carb`, `ingredie
 	(13, 'Banaan', 91, 5, 3, 81, 'banaan', 'Koori ja tükelda banaan'),
 	(14, 'Paprika', 28, 4, 2, 18, 'paprika', 'Pese ja viiluta paprika.'),
 	(15, 'Banaanikeefir', 81, 10, 17, 53, 'banaan, mahlakonsentraat suhkruga, suhkur, keefir (2,5%)', 'Segada keefir, suhkur ja mahlakontsentraat. Banaanid koorida, tükeldada väiksemaks, püreerida saumikseriga koos osa keefiriga. Ühendada ülejäänud maitsestatud keefir ja püreeritud banaanid, vahustada. Serveerida kohe. Kaunistuseks võib peale (sisse) lisada maasikaid või kirsse.');
+
+INSERT INTO `person_menu` (`id`, `person_id`, `breakfast`, `breakfast_amount`, `lunchsnack`, `lunchsnack_amount`, `lunch`, `lunch_amount`, `dinnersnack`, `dinnersnack_amount`, `dinner`, `dinner_amount`) VALUES
+	(2, 31, '4', 200, '', 0, '8', 300, '', 0, '5', 300),
+	(3, 32, '6', 100, '11', 100, '8', 300, '12', 200, '9', 200),
+	(4, 23, '4', 200, '', 0, '5', 300, '', 0, '3', 200),
+	(5, 39, '4', 200, '', 0, '5', 400, '', 0, '8', 300),
+	(6, 30, '4', 100, '10', 400, '5', 400, '12', 400, '8', 400),
+	(9, 3, '6', 200, '11', 200, '5', 100, '12', 200, '8', 200);
+
+INSERT INTO `person` (`id`, `user_id`, `name`, `photo`, `age`, `gender`, `physical_activity`) VALUES
+	(3, 2, 'Meeri', 'http://localhost:8101/files/file/88cdd6b1-96b4-4bca-aa8e-b4ec3fca35fc.png', 5, 'F', 'medium'),
+	(23, 3, 'Plika', 'http://localhost:8101/files/file/87b913d3-5cf5-4ee7-a795-e5fd76753747.png', 8, 'F', 'low'),
+	(24, 3, 'Mats', 'http://localhost:8101/files/file/e1754bde-a9df-4d6e-af39-c4f87b2a6bf5.png', 6, 'M', 'high'),
+	(27, 1, 'adminike', '', 3, 'M', 'low'),
+	(29, 2, 'Siim', 'https://images.unsplash.com/flagged/photo-1551600466-464bbbbd15f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 5, 'M', 'low'),
+	(30, 4, 'Marju', 'https://images.unsplash.com/photo-1458134580443-fbb0743304eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 5, 'F', 'medium'),
+	(31, 4, 'Paul', 'https://images.unsplash.com/photo-1472162072942-cd5147eb3902?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 5, 'M', 'medium'),
+	(32, 4, 'Liisa', 'https://images.unsplash.com/photo-1517508633535-fa608e568fb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 6, 'F', 'medium'),
+	(34, 1, 'test', '', 3, 'F', 'medium'),
+	(38, 3, 'Plika', '', 4, 'F', 'low'),
+	(39, 4, 'Siim', 'https://images.unsplash.com/photo-1533512930330-4ac257c86793?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 4, 'M', 'high');
